@@ -3,7 +3,7 @@ name: Deploy
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   deploy:
@@ -11,18 +11,17 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      - name: Set up SSH keys
-        uses: webfactory/ssh-agent@v0.5.0
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
         with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          node-version: '16'
+      
+      - name: Install dependencies
+        run: npm install --force
 
-      - name: Install dependencies and build
-        run: |
-          npm ci
-          npm run build
+      - name: Start application
+        run: npm run start:dev
 
-      - name: Deploy to server
-        run: |
-          ssh <username>@<server-ip> "cd /path/to/project && git pull"
+      
