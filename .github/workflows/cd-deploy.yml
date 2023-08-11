@@ -18,8 +18,15 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Connect to EC2
-        run: ssh -i "ubuntu_key.pem" ubuntu@ec2-54-169-229-203.ap-southeast-1.compute.amazonaws.com
+      - name: SSH into EC2
+        uses: appleboy/ssh-action@master
+        with:
+          host: 172-31-18-86
+          username: ubuntu
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            ls
+
       
       # - name: Install dependencies
       #   run: npm install --force
