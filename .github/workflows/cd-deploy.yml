@@ -19,7 +19,7 @@ jobs:
         node-version: 'latest'
     
     - name: SSH to server
-      uses: appleboy/ssh-action@latest
+      uses: appleboy/ssh-action@v2
       with:
         host: '172.31.22.21'
         username: ubuntu
