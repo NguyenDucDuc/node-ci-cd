@@ -7,36 +7,23 @@ on:
 
 jobs:
   build:
-    runs-on: self-hosted
-
-    strategy:
-      matrix: 
-        node-version: [19.x]
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version}}
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 'latest'
 
-      - name: Pull code
-        run: git pull origin master
+    - name: Install dependencies
+      run: npm install
 
-      - name: start
-        run: npm run start:dev
+    - name: Run start
+      run: npm run start:dev
 
-
-
-      
-      # - name: Install dependencies
-      #   run: npm install --force
-
-      # - name: Start application
-      #   run: npm run start:dev
-      #   timeout-minutes: 1
             
 
 
