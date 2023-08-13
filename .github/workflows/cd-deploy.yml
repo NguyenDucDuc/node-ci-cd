@@ -17,12 +17,23 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: 'latest'
+    
+    - name: SSH to server
+      uses: appleboy/ssh-action@v0.4.0
+      with:
+        host: '172.31.22.21'
+        username: ubuntu
+        password: '123'
+        script: |
+          ls
+          cd ./node-ci-cd
+          npm run start:dev
 
-    - name: Install dependencies
-      run: npm install
+    # - name: Install dependencies
+    #   run: npm install
 
-    - name: Run start
-      run: npm run start:dev
+    # - name: Run start
+    #   run: npm run start:dev
 
             
 
