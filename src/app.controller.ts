@@ -12,7 +12,12 @@ export class AppController {
   }
 
   @Get('/hello1')
-  async(@Res() res: Response) {
+  async hello1(@Res() res: Response) {
     return res.status(200).send('hello 1');
+  }
+
+  @Get('/hello2')
+  async hello2(@Res() res: Response) {
+    return res.status(200).send('hello 2');
   }
 }

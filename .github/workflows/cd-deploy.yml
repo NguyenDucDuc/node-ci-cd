@@ -27,6 +27,7 @@ jobs:
         script: |
           ls
           cd ./node-ci-cd
+          git pull origin master
           npm run start:dev
 
     # - name: Install dependencies
