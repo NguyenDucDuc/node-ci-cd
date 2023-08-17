@@ -1,9 +1,9 @@
 name: Deploy
 
 on:
-  push:
-    branches:
-      - master
+  pull_request:
+    types:
+      - closed
 
 jobs:
   build:
@@ -17,18 +17,22 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: 'latest'
+
+    - name: Install dependencies
+      run: npm install
+
     
-    - name: SSH to server
-      uses: appleboy/ssh-action@v1.0.0
-      with:
-        host: '54.169.103.244'
-        username: ubuntu
-        password: '123'
-        script: |
-          ls
-          cd ./node-ci-cd
-          git pull origin master
-          npm run start:dev
+    # - name: SSH to server
+    #   uses: appleboy/ssh-action@v1.0.0
+    #   with:
+    #     host: '54.169.103.244'
+    #     username: ubuntu
+    #     password: '123'
+    #     script: |
+    #       ls
+    #       cd ./node-ci-cd
+    #       git pull origin master
+    #       npm run start:dev
 
     # - name: Install dependencies
     #   run: npm install
